@@ -1,10 +1,10 @@
 // cloud function 3
 const admin = require('firebase-admin');
 
-module.exports = function(req, res){
+module.exports = function(req, res) {
     // if user does not provide a phone number or code (have to have both)
-    if(!req.body.phone || !req.bod.code){
-        return res.status(422).send({ error: 'Phone and code must be provided' });
+    if (!req.body.phone || !req.body.code) {
+        return res.status(422).send({ error: 'Phone and code must be provided'});
     }
 
     const phone = String(req.body.phone).replace(/[^\d]/g, '');
@@ -21,7 +21,7 @@ module.exports = function(req, res){
                 // this is a callback event handler direclty to the db stream
                 // so the below will say once something has been returned STOP listening for more
                 // kind of like a connection.close()
-                ref.off();
+                dbRef.off();
                 const user = snapshot.val();
 
                 if(user.code !== code || !user.codeValid){
@@ -30,7 +30,7 @@ module.exports = function(req, res){
 
                 // if we get this far the code is valid and user is good
                 // next mark the existing code as valid
-                ref.update({ codeValid: false });
+                dbRef.update({ codeValid: false });
 
                 // if user is authenticated give them a JWT
                 // since we are using anonym method of authentication for ths proj have to provide this manually
