@@ -1,3 +1,4 @@
+// cloud function 1
 const admin = require('firebase-admin');
 // can also be = () =>     instead of function()
 // convention to say req, res instead of full
