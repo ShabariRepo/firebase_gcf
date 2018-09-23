@@ -14,7 +14,7 @@ module.exports = function(req, res){
     // format the phone number to remove dashes and parens
     // cast as string in case its number
     // regex for any character that is not a number
-    const phone = String(req.body.phone).replace(/[^\d]/g, "");
+    const phone = String(req.body.phone).replace(/[^\d]/g, '');
     
     // create new user account using that phone number
     // uid is the property to identify user
@@ -22,8 +22,5 @@ module.exports = function(req, res){
     admin.auth().createUser({ uid: phone })
         .then(user => res.send(user))
         .catch(err => res.status(422).send({ error: err }));
-
-    // respond to the user request saying the account was made
-
-    
+    // respond to the user request saying the account was made    
 }
