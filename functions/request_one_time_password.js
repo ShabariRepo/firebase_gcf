@@ -18,7 +18,7 @@ module.exports = function(req, res){
             twilio.messages.create({
                 body: 'Your Code for flutr is: ' + code,
                 to: phone,
-                from: '6479300299'
+                from: '16479300229'
             }, (err) => {
                 // same production rules as below apply here (right now were debugging twilio)
                 if(err){ return res.status(422).send(err); }
